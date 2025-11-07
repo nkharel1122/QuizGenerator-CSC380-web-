@@ -1,1 +1,1 @@
-# QuizGenerator---CSC380-
+# QuizGenerator
