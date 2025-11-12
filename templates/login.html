@@ -11,9 +11,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #0c1e50, #d9e2ff);
+            min-height: 100vh;
+            background: linear-gradient(135deg, #002384, #d9e2ff);
+            padding: 20px;
+            position: relative;
         }
+
+        
 
         .login-container {
             background: white;
@@ -67,7 +71,6 @@
         <h2>Class Quiz Login</h2>
         <form id="loginForm">
             <input type="email" id="email" placeholder="Student Email" required />
-            <input type="text" id="studentId" placeholder="Student ID" required />
             <button type="submit">Login</button>
             <div id="error" class="error"></div>
         </form>
@@ -77,7 +80,6 @@
         document.getElementById("loginForm").addEventListener("submit", function (e) {
             e.preventDefault();
             const email = document.getElementById("email").value.trim();
-            const studentId = document.getElementById("studentId").value.trim();
             const errorDiv = document.getElementById("error");
 
             // Basic validation
@@ -85,19 +87,15 @@
                 errorDiv.textContent = "Please use your university email.";
                 return;
             }
-
-            if (!/^[A-Z0-9]{6,}$/i.test(studentId)) {
-                errorDiv.textContent = "Invalid Student ID.";
-                return;
-            }
+         
 
             // Fake login simulation
             localStorage.setItem("studentEmail", email);
-            localStorage.setItem("studentId", studentId);
 
             // Redirect to quiz page
-            window.location.href = "quiz.html";
+            window.location.href = "homeTemplate.html";
         });
+
     </script>
 </body>
 
