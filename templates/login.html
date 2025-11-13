@@ -11,6 +11,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+<<<<<<< HEAD
             height: 100vh;
             background-image: url("{{ url_for('static', filename='galaxy.jpeg') }}");
             background-size: cover;
@@ -25,7 +26,15 @@
             backdrop-filter: blur(10px);             
             -webkit-backdrop-filter: blur(10px);
             z-index: -1;
+=======
+            min-height: 100vh;
+            background: linear-gradient(135deg, #002384, #d9e2ff);
+            padding: 20px;
+            position: relative;
+>>>>>>> e25fe0ece6678e6e464e5a8b69835bfd19601706
         }
+
+        
 
         .login-container {
             background: rgb(40, 40, 44);
@@ -107,7 +116,6 @@
         <h2>Login</h2>
         <form id="loginForm">
             <input type="email" id="email" placeholder="Student Email" required />
-            <input type="text" id="studentId" placeholder="Student ID" required />
             <button type="submit">Login</button>
             <div id="error" class="error"></div>
         </form>
@@ -117,7 +125,6 @@
         document.getElementById("loginForm").addEventListener("submit", function (e) {
             e.preventDefault();
             const email = document.getElementById("email").value.trim();
-            const studentId = document.getElementById("studentId").value.trim();
             const errorDiv = document.getElementById("error");
 
             // Basic validation
@@ -125,19 +132,20 @@
                 errorDiv.textContent = "Please use your university email.";
                 return;
             }
-
-            if (!/^[A-Z0-9]{6,}$/i.test(studentId)) {
-                errorDiv.textContent = "Invalid Student ID.";
-                return;
-            }
+         
 
             // Fake login simulation
             localStorage.setItem("studentEmail", email);
-            localStorage.setItem("studentId", studentId);
 
+<<<<<<< HEAD
             // Redirect to home page
             window.location.href = "/home";
+=======
+            // Redirect to quiz page
+            window.location.href = "homeTemplate.html";
+>>>>>>> e25fe0ece6678e6e464e5a8b69835bfd19601706
         });
+
     </script>
 </body>
 
