@@ -4,37 +4,29 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>Login</title>
     <style>
         body {
             font-family: 'Inter', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-<<<<<<< HEAD
             height: 100vh;
             background-image: url("{{ url_for('static', filename='galaxy.jpeg') }}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            margin: 0;
         }
 
         .bg-fog {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.45);         
-            backdrop-filter: blur(10px);             
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: -1;
-=======
-            min-height: 100vh;
-            background: linear-gradient(135deg, #002384, #d9e2ff);
-            padding: 20px;
-            position: relative;
->>>>>>> e25fe0ece6678e6e464e5a8b69835bfd19601706
         }
-
-        
 
         .login-container {
             background: rgb(40, 40, 44);
@@ -54,24 +46,23 @@
             width: 100%;
             padding: 10px;
             margin: 0.5rem 0;
-            border: 1px solid #5c5c5c;        
+            border: 1px solid #5c5c5c;
             border-radius: 6px;
             font-size: 1rem;
-
             background-color: #1a1a1a;
-            color: #9f9f9f;    
-            
+            color: #9f9f9f;
             box-sizing: border-box;
         }
 
         input::placeholder {
-            color: #9f9f9f;                    
+            color: #9f9f9f;
         }
 
         input:focus {
-            background-color: #222222;         
+            background-color: #222222;
         }
 
+        
         input:-webkit-autofill,
         input:-webkit-autofill:hover,
         input:-webkit-autofill:focus,
@@ -80,10 +71,6 @@
             -webkit-text-fill-color: #9f9f9f !important;
             border: 1px solid #5c5c5c !important;
             caret-color: #9f9f9f !important;
-        }
-
-        input:-webkit-autofill:focus {
-            -webkit-box-shadow: 0 0 0 1000px #222222 inset !important;
         }
 
         button {
@@ -96,6 +83,7 @@
             border-radius: 6px;
             cursor: pointer;
             transition: background 0.3s;
+            margin-top: 10px;
         }
 
         button:hover {
@@ -112,10 +100,13 @@
 
 <body>
     <div class="bg-fog"></div>
+
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Class Quiz Login</h2>
+
         <form id="loginForm">
             <input type="email" id="email" placeholder="Student Email" required />
+            <input type="text" id="studentId" placeholder="Student ID" required />
             <button type="submit">Login</button>
             <div id="error" class="error"></div>
         </form>
@@ -124,28 +115,30 @@
     <script>
         document.getElementById("loginForm").addEventListener("submit", function (e) {
             e.preventDefault();
+
             const email = document.getElementById("email").value.trim();
+            const studentId = document.getElementById("studentId").value.trim();
             const errorDiv = document.getElementById("error");
 
-            // Basic validation
+            
             if (!email.endsWith("@oswego.edu")) {
                 errorDiv.textContent = "Please use your university email.";
                 return;
             }
-         
 
-            // Fake login simulation
+            
+            if (!/^[A-Z0-9]{6,}$/i.test(studentId)) {
+                errorDiv.textContent = "Invalid Student ID.";
+                return;
+            }
+
+            // Store login
             localStorage.setItem("studentEmail", email);
+            localStorage.setItem("studentId", studentId);
 
-<<<<<<< HEAD
-            // Redirect to home page
+            // Redirect
             window.location.href = "/home";
-=======
-            // Redirect to quiz page
-            window.location.href = "homeTemplate.html";
->>>>>>> e25fe0ece6678e6e464e5a8b69835bfd19601706
         });
-
     </script>
 </body>
 

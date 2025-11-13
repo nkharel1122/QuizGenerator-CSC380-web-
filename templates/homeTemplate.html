@@ -2,20 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz Portal</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
-<<<<<<< HEAD
             background-image: url("{{ url_for('static', filename='galaxy.jpeg') }}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-=======
-            background: linear-gradient(135deg, #002384, #d9e2ff);
->>>>>>> e25fe0ece6678e6e464e5a8b69835bfd19601706
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -27,154 +24,59 @@
         .bg-fog {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.45);         
-            backdrop-filter: blur(10px);             
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: -1;
         }
 
         h1 {
-<<<<<<< HEAD
-            color: #9f9f9f;
-=======
-            font-size: 30px;
-            color: black;
->>>>>>> e25fe0ece6678e6e464e5a8b69835bfd19601706
+            color: #b3b2b2;
             margin-bottom: 40px;
             text-align: center;
-            
         }
 
-        .options-container {
+        .button-container {
             display: flex;
             flex-direction: column;
-            gap: 25px;
-            max-width: 500px;
+            gap: 20px;
+            width: 250px;
         }
 
-<<<<<<< HEAD
-        button {
+        .button-container button {
             width: 100%;
             padding: 15px;
             border: none;
             border-radius: 6px;
+
             background: #004aad;
             color: white;
+
             font-size: 16px;
-=======
-        .options-card {
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 25px;
-            transition: all 0.3s ease;
->>>>>>> e25fe0ece6678e6e464e5a8b69835bfd19601706
             cursor: pointer;
-            background: #fafafa;
-        }
-        .options-card:hover {
-            border-color: #667eea;
-            background: #f8f9ff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+            transition: background-color 0.2s ease;
         }
 
-<<<<<<< HEAD
-        button:hover {
+        .button-container button:hover {
             background-color: #003b8a;
-=======
-           .options-card h2 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #2c3e50;
->>>>>>> e25fe0ece6678e6e464e5a8b69835bfd19601706
         }
-
-        .options-card p {
-            margin-bottom: 15px;
-            color: #5a6c7d;
-        }
-
-        .options-card ul {
-            margin: 10px 0 20px 20px;
-            padding: 0;
-        }
-
-        .options-card li {
-            color: #5a6c7d;
-            margin-bottom: 8px;
-        }
-
-        .options-card button {
-            background-color: black;
-            color: white;
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .options-card button:hover {
-            background-color: #333;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-    
     </style>
 </head>
 
 <body>
-<<<<<<< HEAD
     <div class="bg-fog"></div>
+
     <h1>Welcome to the Quiz Portal</h1>
 
     <div class="button-container">
-        <a href="{{ url_for('quiz_list') }}">
+        <a href="{{ url_for('quiz_list') }}" style="text-decoration:none;">
             <button>Take a Quiz</button>
         </a>
 
-        <a href="{{ url_for('quiz_list') }}">
+        <a href="{{ url_for('quiz_list') }}" style="text-decoration:none;">
             <button>Study</button>
         </a>
     </div>
+
 </body>
 </html>
-=======
-    
-    <h1>Welcome to the Quiz Portal</h1>
-
-    <div class="options-container">
-        <div class="options-card">
-            <h2>Take a Quiz</h2>
-            <p>Test your knowledge with quizzes.
-            <ul>
-                <li>Graded</li>
-                <li>Visible by professor</li>
-            </ul>
-               
-            </p>
-            
-            <button onclick="window.location.href='quiz.html'">Start Quiz</button>
-
-        </div>
-
-        <div class="options-card">
-            <h2>Study</h2>
-            <p>Test your knowledge with quizzes.
-                <ul>
-                    <li>Ungraded</li>
-                    <li>Visible by professor</li>
-                    <li>AI generated quizzes</li>
-                </ul>
-            </p>
-            
-            <button onclick="window.location.href='quiz.html'">Start Quiz</button>
-        
-        </div>
-    </div>
-
-</body
->>>>>>> e25fe0ece6678e6e464e5a8b69835bfd19601706
