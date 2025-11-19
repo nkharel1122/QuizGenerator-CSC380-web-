@@ -1,61 +1,45 @@
-from openai import OpenAI
+import openai
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-
-def ask_ai_for_feedback(question, correct_answer, student_answer):
-    system_message = {
-        "role": "system",
-        "content": (
-            "You are an astronomy tutor. "
-            "If the student's answer is correct or reasonably equivalent to the expected answer, "
-            "respond with ONLY the exact text: CORRECT_ANSWER. "
-            "If incorrect, give a helpful hint WITHOUT revealing the answer. Give the hint without saying it is a hint."
-        )
-    }
-
-    user_message = {
-        "role": "user",
-        "content": f"""
-        Question: {question}
-        Correct answer: {correct_answer}
-        Student's answer: {student_answer}
-
-        Respond as instructed.
-        """
-    }
-
-    response = query_AI([system_message, user_message])
-    return response
-
-
-def ask_the_bot(prompt):
-    system_message = {
-        "role": "system",
-        "content": (
-            "You are an assistant that helps introductory astronomy students. "
-            "Answer the question clearly but concisely."
-        )
-    }
-
-    user_message = {
-        "role": "user",
-        "content": prompt
-    }
-
-    response = query_AI([system_message, user_message])
-    return response
-
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def query_AI(messages):
-    response = client.chat.completions.create(
-        model="gpt-4o",
+    response = openai.ChatCompletion.create(
+        model="gpt-4o-mini",
         messages=messages,
         temperature=0.3,
         max_tokens=300,
-        top_p=1,
     )
-    return response.choices[0].message.content.strip()
+    return response["choices"][0]["message"]["content"].strip()
+
+
+def ask_ai_for_feedback(question, correct_answer, student_answer):
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                "You are an astronomy tutor. "
+                "If the student is correct, respond ONLY with: CORRECT_ANSWER. "
+                "If wrong, give a helpful short hint without revealing the answer."
+            )
+        },
+        {
+            "role": "user",
+            "content": f"""
+            Question: {question}
+            Correct answer: {correct_answer}
+            Student answer: {student_answer}
+            """
+        }
+    ]
+    return query_AI(messages)
+
+
+def ask_the_bot(prompt):
+    messages = [
+        {"role": "system", "content": "You help astronomy students answer questions simply."},
+        {"role": "user", "content": prompt}
+    ]
+    return query_AI(messages)
