@@ -77,10 +77,68 @@ def question_page(quiz_name, q_index):
         q_index=q_index
     )
 
+@app.route("/study")
+def study_list():
+    return render_template("studyTemplate.html", quizzes=quiz_questions)
+
+@app.route("/study/<quiz_name>/<int:q_index>", methods=["GET", "POST"])
+def study_question(quiz_name, q_index):
+    quiz = quiz_questions.get(quiz_name)
+
+    if not quiz:
+        return f"<h3>Quiz '{quiz_name}' not found.</h3>", 404
+        
+    questions = quiz["questions"]
+    if q_index < 0 or q_index >= len(questions):
+        return "<h3>Invalid question index.</h3>", 404
+
+    original_question = questions[q_index]
+    ai_question = None
+    feedback = None
+
+    if request.method == "POST":
+        ai_question = request.form.get("ai_question")
+        student_answer = request.form.get("student_answer", "").strip()
+        correct_answer = original_question.get("correct_answer", "")
+
+        try:
+            feedback = AIBot.ask_ai_for_feedback(
+                ai_question,
+                correct_answer,
+                student_answer
+            )
+        except Exception as e:
+            feedback = f"Error: {e}"
+
+    else:
+        ai_question = AIBot.query_AI([
+            {"role": "system", "content": "You are a tutor generating challenging study questions."},
+            {"role": "user", "content": 
+                f"Create a slightly harder version of this question. "
+                f"Keep it around the same length as the original question. "
+                f"Do NOT include the answer:\n{original_question['question']}"
+            }
+        ])
+
+    return render_template(
+        "study_question.html",
+        quiz_name=quiz_name,
+        quiz=quiz,
+        ai_question=ai_question,
+        feedback=feedback,
+        q_index=q_index
+    )
+
+
 @app.route("/quiz_complete/<quiz_name>")
 def quiz_complete(quiz_name):
     """Show the quiz completion page."""
     return render_template("quiz_complete.html", quiz_name=quiz_name)
+
+@app.route("/study_complete/<quiz_name>")
+def study_complete(quiz_name):
+    """Show the study completion page."""
+    return render_template("study_complete.html", quiz_name=quiz_name)
 
 
 @app.route("/get_quiz/<quiz_name>")
