@@ -52,7 +52,7 @@ def ask_the_bot(prompt):
 
 def query_AI(messages):
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=messages,
         temperature=0.3,
         max_tokens=300,

@@ -5,7 +5,6 @@ import AIBot
 
 app = Flask(__name__)
 
-
 quiz_questions = {}
 
 def load_quizzes_from_files():
@@ -30,7 +29,6 @@ def load_quizzes_from_files():
                 print(f"Error loading {file}: {e}")
 
     print(f"Loaded {len(quiz_questions)} quizzes.")
-
 
 @app.route("/")
 def login():
@@ -165,11 +163,8 @@ def check_answer():
 
 
 
-#deployment
+load_quizzes_from_files()
 
-if __name__ == "__main__":
-    load_quizzes_from_files()
-    app.run()
 
 #for debugging
 
