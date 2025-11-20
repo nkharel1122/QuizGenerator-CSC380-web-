@@ -22,7 +22,7 @@ def ask_ai_for_feedback(question, correct_answer, student_answer):
             "content": (
                 "You are an astronomy tutor. "
                 "If the student is correct, respond ONLY with: CORRECT_ANSWER. "
-                "If wrong, give a helpful short hint without revealing the answer."
+                "If wrong, give a helpful short hint without revealing the answer. Give a hint without saying hint."
             )
         },
         {
