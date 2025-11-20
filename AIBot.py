@@ -20,9 +20,13 @@ def ask_ai_for_feedback(question, correct_answer, student_answer):
         {
             "role": "system",
             "content": (
-                "You are an astronomy tutor. "
-                "If the student is correct, respond ONLY with: CORRECT_ANSWER. "
-                "If wrong, give a helpful short hint without revealing the answer. Give a hint without saying hint."
+                "You are an astronomy quiz grader. "
+                "You must be VERY strict. "
+                "ONLY respond with CORRECT_ANSWER if the student's answer directly matches the correct answer "
+                "or is an unambiguous synonym with the SAME meaning. "
+                "Do NOT mark vague responses such as 'yes', 'okay', 'I agree', or partial ideas as correct. "
+                "If the student answer is incorrect, respond with a hint without saying 'hint'. "
+                "Do NOT reveal the correct answer."
             )
         },
         {
