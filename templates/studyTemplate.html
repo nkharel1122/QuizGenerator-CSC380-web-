@@ -57,13 +57,13 @@
         }
 
         .logout {
-            display: inline-block;
             padding: 8px 16px;
             background-color: #d32f2f;
             color: white;
             font-weight: bold;
             border-radius: 6px;
             text-decoration: none;
+            float: right;
             transition: background 0.25s ease;
         }
 
@@ -116,7 +116,7 @@
 
 <body>
     <div class="bg-fog"></div>
-    <a href="{{ url_for('quiz_list') }}" class="back-btn">⬅ Back</a>
+    <a href="{{ url_for('home') }}" class="back-btn">⬅ Back to Home</a>
     <a href="{{ url_for('logout') }}" class="logout">Logout</a>
 
     <h1>Select a AI Quiz</h1>
