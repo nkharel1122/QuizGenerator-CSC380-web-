@@ -321,6 +321,15 @@ def study_question(quiz_name, q_index):
         q_index=q_index
     )
 
+@app.route("/study_complete/<quiz_name>")
+@login_required
+def study_complete(quiz_name):
+    quiz = quiz_questions.get(quiz_name)
+    if not quiz:
+        return f"<h3>Quiz '{quiz_name}' not found.</h3>", 404
+
+    return render_template("study_complete.html", quiz_name=quiz_name)
+
 # ------------------------------
 # API Endpoints
 # ------------------------------

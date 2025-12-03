@@ -102,11 +102,11 @@
         <!-- Form to submit score and go to dashboard -->
         <form action="{{ url_for('quiz_complete', quiz_name=quiz_name) }}" method="POST">
             <input type="hidden" name="score" value="{{ score }}">
-            <button type="submit" class="btn btn-primary">Go to Dashboard</button>
+            <button type="submit" class="btn-main">Go to Dashboard</button>
         </form>
     
         <!-- Optional: Retake Quiz -->
-        <a href="{{ url_for('question_page', quiz_name=quiz_name, q_index=0) }}" class="btn btn-secondary">Retake Quiz</a>
+        <a href="{{ url_for('question_page', quiz_name=quiz_name, q_index=0) }}" class="btn-outline">Retake Quiz</a>
     </div>
 </body>
 </html>
