@@ -1,30 +1,30 @@
 import os
-import requests
+import smtplib
+from email.mime.text import MIMEText
+from threading import Thread
 
-RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+EMAIL_ADDR = "quizbotverifier@gmail.com"
+EMAIL_PASS = os.environ.get("EMAIL_PASS")
 
 
-def sendMessage(address, code: str) -> None:
+def _send_email(address, code):
+    body = f"{code} is your verification code. If this was not you, ignore this email."
+    msg = MIMEText(body, "plain")
+    msg["Subject"] = "Verification Code"
+    msg["From"] = EMAIL_ADDR
+    msg["To"] = address
 
-    if not RESEND_API_KEY:
-        raise RuntimeError("RESEND_API_KEY is not set in environment variables.")
+    try:
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=5) as server:
+            server.starttls()
+            server.login(EMAIL_ADDR, EMAIL_PASS)
+            server.sendmail(EMAIL_ADDR, [address], msg.as_string())
+        print(f"Sent verification email to {address}")
+    except Exception as e:
+        print(f"Email send error: {e}")
 
-    payload = {
-        "from": "QuizBot <onboarding@resend.dev>", 
-        "to": [address],
-        "subject": "Verification Code",
-        "text": f"{code} is your verification code. If this was not you, ignore this email.",
-    }
 
-    response = requests.post(
-        "https://api.resend.com/emails",
-        headers={
-            "Authorization": f"Bearer {RESEND_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        json=payload,
-        timeout=10,
-    )
-
-    if response.status_code >= 400:
-        raise RuntimeError(f"Resend error {response.status_code}: {response.text}")
+def sendMessage(address, code):
+    if not address.lower().endswith("@oswego.edu"):
+        raise ValueError("Email must be an @oswego.edu address.")
+    Thread(target=_send_email, args=(address, code), daemon=True).start()
