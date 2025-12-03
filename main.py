@@ -306,7 +306,7 @@ def study_question(quiz_name, q_index):
         ai_question = AIBot.query_AI([
             {"role": "system", "content": "You are a tutor generating challenging study questions."},
             {"role": "user", "content":
-                f"Create a slightly harder version of this question. "
+                f"Create a different but similar and harder version of this question. "
                 f"Keep it around the same length as the original question. "
                 f"Do NOT include the answer:\n{original_question['question']}"
             }
