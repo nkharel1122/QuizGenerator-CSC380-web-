@@ -81,7 +81,7 @@
 
 <body>
     <a href="{{ url_for('logout') }}" class="logout">Logout</a>
-    <a href="{{ url_for('home')}}" class="back-btn">⬅ Back to Quizzes</a>
+    <a href="{{ url_for('quiz_list') }}" class="back-btn">⬅ Back to Quizzes</a>
     <h1>Dashboard for {{ email }}</h1>
 
     {% if results %}
