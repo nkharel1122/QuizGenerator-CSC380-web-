@@ -92,7 +92,7 @@ def login():
         pending_verifications[email] = {"code": code, "expires": expires}
 
         try:
-            #sendMessage(email, code)
+            sendMessage(email, code)
             flash("Verification code sent to your email.", "info")
             session["email"] = email
             return redirect(url_for("verify"))
