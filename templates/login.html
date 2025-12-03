@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="/static/Q.png">
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -40,6 +42,10 @@
         h2 {
             color: #9f9f9f;
             margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            color: #555555;
         }
 
         input {
@@ -102,14 +108,15 @@
     <div class="bg-fog"></div>
 
     <div class="login-container">
-        <h2>Class Quiz Login</h2>
+        <h2>QuizBot Login</h2>
 
-        <form id="loginForm">
-            <input type="email" id="email" placeholder="Student Email" required />
-            <input type="text" id="studentId" placeholder="Student ID" required />
-            <button type="submit">Login</button>
-            <div id="error" class="error"></div>
+     
+        <form method="POST">
+            <h3>Enter your SUNY email</h3>
+            <input type="email" name="email" required>
+            <button type="submit">Send Code</button>
         </form>
+          
     </div>
 
     <script>
