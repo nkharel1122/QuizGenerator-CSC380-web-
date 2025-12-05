@@ -1,30 +1,24 @@
 import os
-import requests
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
-RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+FROM_EMAIL = os.getenv("FROM_EMAIL", "quizbotverifier@gmail.com")
 
 
-def sendMessage(address, code: str) -> None:
+def sendMessage(address, code):
+    if not SENDGRID_API_KEY:
+        raise RuntimeError("SENDGRID_API_KEY is not set")
 
-    if not RESEND_API_KEY:
-        raise RuntimeError("RESEND_API_KEY is not set in environment variables.")
-
-    payload = {
-        "from": "QuizBot <onboarding@resend.dev>", 
-        "to": [address],
-        "subject": "Verification Code",
-        "text": f"{code} is your verification code. If this was not you, ignore this email.",
-    }
-
-    response = requests.post(
-        "https://api.resend.com/emails",
-        headers={
-            "Authorization": f"Bearer {RESEND_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        json=payload,
-        timeout=10,
+    message = Mail(
+        from_email=FROM_EMAIL,
+        to_emails=address,
+        subject="Verification Code",
+        plain_text_content=f"{code} is your verification code. If this was not you, ignore this email.",
     )
 
+    sg = SendGridAPIClient(SENDGRID_API_KEY)
+    response = sg.send(message)
+
     if response.status_code >= 400:
-        raise RuntimeError(f"Resend error {response.status_code}: {response.text}")
+        raise RuntimeError(f"SendGrid error {response.status_code}: {response.body}")
