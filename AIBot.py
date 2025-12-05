@@ -26,7 +26,7 @@ def ask_ai_for_feedback(question, correct_answer, student_answer):
                 "or is an unambiguous synonym with the SAME meaning. "
                 "Do NOT mark vague responses such as 'yes', 'okay', 'I agree', or partial ideas as correct. "
                 "If the student answer is incorrect, respond with a hint without saying 'hint'. "
-                "Do NOT reveal the correct answer."
+                "Do NOT reveal the correct answer, unless the student specifically asks for the answer"
             )
         },
         {
